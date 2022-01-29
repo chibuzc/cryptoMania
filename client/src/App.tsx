@@ -30,7 +30,7 @@ function App() {
                 <CryptoDetails />
               </Route>
               <Route exact path='/news'>
-                <News />
+                <News simplified = {false} />
               </Route>
             </Switch>
           </div>
