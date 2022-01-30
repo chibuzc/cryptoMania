@@ -7,7 +7,7 @@ interface CryptoApiRequest { url: string, headers: CryptoApiHeaders }
 
 const cryptoApiHeaders: CryptoApiHeaders = {
     'x-rapidapi-host': 'coinranking1.p.rapidapi.com',
-    // 'x-rapidapi-key': env.RAPID_API_SECRET
+     // 'x-rapidapi-key': env.RAPID_API_SECRET
 }
 
 const baseUrl = 'https://coinranking1.p.rapidapi.com';
@@ -20,6 +20,12 @@ export const cryptoApi = createApi({
     endpoints: (builder) => ({
         getCryptos: builder.query({
             query: (count) => createRequest(`/coins?limit=${count}`)
+        }),
+        getCryptoDetails: builder.query({
+            query: (coinId) => createRequest(`/coin/${coinId}`)
+        }),
+        getCryptoHistory: builder.query({
+            query: ({coinId, timePeriod}) => createRequest(`/coin/${coinId}/history?timeperiod=${timePeriod}`)
         })
     })
 })
@@ -27,5 +33,7 @@ export const cryptoApi = createApi({
 export const {
     // this hook is made available by default from react toolKit
     // it should match the name from "getCryptos: builder.query" in the createApi call and append a prefix 'use'  and a suffix 'Query'
-    useGetCryptosQuery
+    useGetCryptosQuery,
+    useGetCryptoDetailsQuery,
+    useGetCryptoHistoryQuery
 } = cryptoApi;
