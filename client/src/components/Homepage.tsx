@@ -13,8 +13,6 @@ const Homepage = () => {
 
     const globalStats = data?.data?.stats
 
-    console.log(data)
-
     if (isFetching) return <div> Loading.... </div>
 
     return <>
