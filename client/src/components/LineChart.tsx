@@ -98,13 +98,13 @@ interface LineChartProps {
 const { Title } = Typography;
 
 const LineChart = ({ coinHistory, currentPrice, coinName } : LineChartProps ) => {
-  const coinPrice = [];
+  const coinPrice: any = [];
   const coinTimestamp = [];
 
-  console.log('deeeeet', coinHistory?.data?.history, currentPrice, coinName)
-
   for (let i = 0; i < coinHistory?.data?.history?.length; i += 1) {
-    coinPrice.push(coinHistory?.data?.history[i].price);
+    // some prices come in as null, should default to last non null price or next non null price
+    let nextOrLastNullbalePrice = coinPrice[i-1] ?? coinHistory?.data?.history[i + 1].price ?? '30000'
+    coinPrice.push(coinHistory?.data?.history[i].price ?? nextOrLastNullbalePrice);
   }
 
   for (let i = coinHistory?.data?.history?.length - 1; i >= 0 ; i -= 1) {
